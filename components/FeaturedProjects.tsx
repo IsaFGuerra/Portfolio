@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import { projects } from "@/data/projects";
 import { IPhoneMockup } from "./IPhoneMockup";
-import { MockScreen } from "./MockScreen";
+import { MockupScreenContent } from "./MockupScreenContent";
 import { SectionReveal } from "./SectionReveal";
 import { SectionKicker } from "./SectionKicker";
 
@@ -109,7 +109,12 @@ export function FeaturedProjects() {
                   transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
                 >
                   <IPhoneMockup accentHint>
-                    <MockScreen content={p.screenContent} />
+                    <MockupScreenContent
+                      image={p.image}
+                      screenContent={p.screenContent}
+                      alt={`${p.name} — captura do app`}
+                      priority={i === 0}
+                    />
                   </IPhoneMockup>
                 </motion.div>
 

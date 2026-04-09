@@ -6,48 +6,55 @@ export type Project = {
   role: string;
   tech: string[];
   screenClassName?: string;
+  /** Fallback UI inside the phone mock when `image` is missing or fails to load */
   screenContent: "sign" | "finance" | "editor" | "wellness";
+  /** Screenshot under `public/`, e.g. `/projects/runicorn.png` */
+  image?: string;
 };
 
 export const projects: Project[] = [
   {
-    id: "signbridge",
-    name: "SignBridge",
-    category: "Mobile · AI · Accessibility",
+    id: "runicorn",
+    name: "Runicorn",
+    category: "iOS · Game · Casual",
     description:
-      "On-device aware interface for sign language interpretation—real-time gesture context, calm feedback, and a flow built for clarity under pressure.",
-    role: "Product, mobile UI, model integration",
-    tech: ["Swift", "Core ML", "ARKit", "UIKit"],
-    screenContent: "sign",
-  },
-  {
-    id: "ledger",
-    name: "North Ledger",
-    category: "Frontend · Product",
-    description:
-      "A restrained financial surface for daily decisions—dense data made legible through hierarchy, motion, and intentional empty states.",
-    role: "Frontend architecture, design systems",
-    tech: ["Next.js", "TypeScript", "Tailwind", "TanStack Query"],
-    screenContent: "finance",
-  },
-  {
-    id: "studio",
-    name: "Studio Notes",
-    category: "Mobile · UX",
-    description:
-      "Capture and structure ideas without friction—offline-first patterns, tactile transitions, and typography tuned for long reading sessions.",
-    role: "React Native, interaction design",
-    tech: ["React Native", "Expo", "Reanimated", "Zustand"],
+      "Endless runner built with SpriteKit: guide a unicorn through an aurora-inspired world, collect stars, and dodge cosmic obstacles—with tilt or on-screen controls for a tactile, immersive pace.",
+    role: "iOS game development · Apple Developer Academy | PUCRS",
+    tech: ["Swift", "SpriteKit", "UIKit", "Core Motion"],
     screenContent: "editor",
+    image: "/projects/runicorn.png",
   },
   {
-    id: "still",
-    name: "Still",
-    category: "Digital product · Wellness",
+    id: "dirty-dogs",
+    name: "Dirty Dogs",
+    category: "iOS · Multiplayer · Game",
     description:
-      "Breathing room in software—a quiet companion for focus with subtle haptics, adaptive layouts, and zero visual noise.",
-    role: "End-to-end product build",
-    tech: ["SwiftUI", "WidgetKit", "CloudKit"],
-    screenContent: "wellness",
+      "A backyard duel where dogs race to find their bone first—dig, uncover items to throw at your rival, and lean on real-time Game Center sessions for quick, lighthearted competition.",
+    role: "iOS game development · Apple Developer Academy | PUCRS",
+    tech: ["Swift", "SwiftUI", "SpriteKit", "Game Center"],
+    screenContent: "editor",
+    image: "/projects/dirty-dogs.png",
+  },
+  {
+    id: "boraa",
+    name: "Boraa",
+    category: "Mobile · Social · Discovery",
+    description:
+      "Helps people discover places, events, and plans through friends and community—nearby picks, check-ins, and a social layer so new experiences feel personal, not algorithmic noise.",
+    role: "Mobile & backend features · Apple Developer Academy | PUCRS",
+    tech: ["Swift", "Node.js", "TypeScript"],
+    screenContent: "editor",
+    image: "/projects/boraa.png",
+  },
+  {
+    id: "rotta",
+    name: "Rotta",
+    category: "iOS · Sports · Fan experience",
+    description:
+      "Brings Formula 2, Formula 3, and F1 Academy closer to fans and newcomers—clear rankings, rich context, and interactive surfaces—plus haptics that evoke engine rumble for a more visceral follow-along.",
+    role: "iOS development · Apple Developer Academy | PUCRS",
+    tech: ["Swift", "UIKit", "Core Haptics"],
+    screenContent: "finance",
+    image: "/projects/rotta.png",
   },
 ];
