@@ -1,57 +1,14 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { skillGroups } from "@/data/skills";
+import { useLocale } from "./LocaleProvider";
 import { SectionReveal } from "./SectionReveal";
 import { SectionKicker } from "./SectionKicker";
 
-const groups = [
-  {
-    title: "Frontend",
-    items: [
-      "React",
-      "TypeScript",
-      "Next.js",
-      "UI architecture",
-    ],
-  },
-  {
-    title: "Mobile",
-    items: [
-      "React Native",
-      "App interfaces",
-      "Mobile UX",
-    ],
-  },
-  {
-    title: "Backend",
-    items: [
-      "APIs",
-      "Integrations",
-      "Data flow",
-      "Service architecture",
-    ],
-  },
-  {
-    title: "AI / Intelligent systems",
-    items: [
-      "Computer vision concepts",
-      "Model integration",
-      "Real-time interaction",
-      "Accessibility-driven solutions",
-    ],
-  },
-  {
-    title: "Product / Design",
-    items: [
-      "Prototyping",
-      "Interface design",
-      "Interaction thinking",
-      "Experience polish",
-    ],
-  },
-];
-
 export function Skills() {
+  const { locale, t } = useLocale();
+
   return (
     <section
       id="skills"
@@ -60,22 +17,22 @@ export function Skills() {
     >
       <div className="mx-auto max-w-6xl px-5 md:px-8">
         <SectionReveal>
-          <SectionKicker>Skills & stack</SectionKicker>
+          <SectionKicker>{t.skills.kicker}</SectionKicker>
           <h2
             id="skills-heading"
             className="mt-5 max-w-xl text-3xl font-semibold tracking-tight text-text-primary md:text-4xl"
           >
-            Capabilities without the{" "}
-            <span className="text-accent">noise</span>.
+            {t.skills.heading}{" "}
+            <span className="text-accent">{t.skills.headingAccent}</span>.
           </h2>
           <p className="mt-5 max-w-lg text-[15px] text-text-secondary">
-            Organized by how I think—not by percentages.
+            {t.skills.subtitle}
           </p>
         </SectionReveal>
 
-        <div className="mt-16 grid gap-10 sm:grid-cols-2 lg:grid-cols-3 lg:gap-12">
-          {groups.map((g, i) => (
-            <SectionReveal key={g.title} delay={i * 0.05}>
+        <div className="mt-16 grid gap-10 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 lg:gap-8">
+          {skillGroups.map((g, i) => (
+            <SectionReveal key={g.id} delay={i * 0.05}>
               <motion.div
                 className="group relative overflow-hidden rounded-2xl border border-[var(--border-subtle)] bg-white/[0.02] p-6 md:p-7"
                 whileHover={{
@@ -92,10 +49,10 @@ export function Skills() {
                   transition={{ duration: 0.8, delay: i * 0.05 }}
                 />
                 <h3 className="relative border-l-2 border-accent/50 pl-3 text-[13px] font-semibold uppercase tracking-wider text-text-primary">
-                  {g.title}
+                  {g.title[locale]}
                 </h3>
                 <ul className="relative mt-5 flex flex-wrap gap-2">
-                  {g.items.map((item) => (
+                  {g.items[locale].map((item) => (
                     <li key={item}>
                       <motion.span
                         className="inline-block rounded-full border border-[var(--border-subtle)] bg-bg-base/80 px-3 py-1.5 text-[12px] font-medium text-text-secondary transition-colors duration-300 group-hover:border-accent/20"

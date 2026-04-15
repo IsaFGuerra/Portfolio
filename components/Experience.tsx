@@ -1,37 +1,14 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { experienceEntries } from "@/data/experience";
+import { useLocale } from "./LocaleProvider";
 import { SectionReveal } from "./SectionReveal";
 import { SectionKicker } from "./SectionKicker";
 
-const milestones = [
-  {
-    period: "2023 — Present",
-    title: "Full-stack product surfaces",
-    org: "Independent & collaborative builds",
-    body: "Shipping web and mobile experiences with emphasis on clarity, performance, and maintainable architecture.",
-  },
-  {
-    period: "2021 — 2023",
-    title: "Deepening mobile & interface craft",
-    org: "Product teams · contract",
-    body: "React Native and native-adjacent work—gesture systems, navigation, and pixel-level polish for consumer apps.",
-  },
-  {
-    period: "2019 — 2021",
-    title: "Frontend foundations",
-    org: "University & early professional",
-    body: "Computer science trajectory with growing focus on UI engineering, design collaboration, and accessible patterns.",
-  },
-  {
-    period: "Ongoing",
-    title: "Applied AI & accessibility",
-    org: "Research-led builds",
-    body: "Exploring computer vision and model integration for assistive experiences—where ethics, latency, and UX meet.",
-  },
-];
-
 export function Experience() {
+  const { locale, t } = useLocale();
+
   return (
     <section
       id="experience"
@@ -40,12 +17,12 @@ export function Experience() {
     >
       <div className="mx-auto max-w-6xl px-5 md:px-8">
         <SectionReveal>
-          <SectionKicker>Experience</SectionKicker>
+          <SectionKicker>{t.experience.kicker}</SectionKicker>
           <h2
             id="experience-heading"
             className="mt-5 max-w-xl text-3xl font-semibold tracking-tight text-text-primary md:text-4xl"
           >
-            A path shaped by craft, systems, and curiosity.
+            {t.experience.heading}
           </h2>
         </SectionReveal>
 
@@ -55,8 +32,8 @@ export function Experience() {
             aria-hidden
           />
           <ol className="space-y-14">
-            {milestones.map((m, i) => (
-              <li key={m.period} className="relative pl-10 md:pl-12">
+            {experienceEntries.map((m, i) => (
+              <li key={m.id} className="relative pl-10 md:pl-12">
                 <motion.span
                   className="absolute left-0 top-1.5 flex h-[18px] w-[18px] items-center justify-center rounded-full border border-white/15 bg-bg-base md:top-2 md:h-5 md:w-5"
                   aria-hidden
@@ -85,16 +62,21 @@ export function Experience() {
                   <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between sm:gap-8">
                     <div>
                       <h3 className="text-lg font-semibold tracking-tight text-text-primary">
-                        {m.title}
+                        {m.title[locale]}
                       </h3>
-                      <p className="mt-1 text-[14px] text-accent/80">{m.org}</p>
+                      <p className="mt-1 text-[14px] text-accent/80">{m.org[locale]}</p>
+                      {m.location ? (
+                        <p className="mt-1 text-[13px] text-text-muted">
+                          {m.location[locale]}
+                        </p>
+                      ) : null}
                     </div>
                     <span className="shrink-0 rounded-full border border-accent/20 bg-accent/[0.06] px-3 py-1 text-[11px] font-medium text-text-secondary">
-                      {m.period}
+                      {m.period[locale]}
                     </span>
                   </div>
                   <p className="mt-4 max-w-xl text-[15px] leading-relaxed text-text-secondary">
-                    {m.body}
+                    {m.body[locale]}
                   </p>
                 </SectionReveal>
               </li>

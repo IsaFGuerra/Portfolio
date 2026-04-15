@@ -6,10 +6,9 @@ import type { ReactNode } from "react";
 type IPhoneMockupProps = {
   children?: ReactNode;
   className?: string;
-  /** 0–1 dimming for non-active carousel slides */
   dim?: boolean;
-  /** Subtle green rim glow on hover */
   accentHint?: boolean;
+  orientation?: "portrait" | "landscape";
 };
 
 export function IPhoneMockup({
@@ -17,10 +16,17 @@ export function IPhoneMockup({
   className = "",
   dim = false,
   accentHint = false,
+  orientation = "portrait",
 }: IPhoneMockupProps) {
+  const isLandscape = orientation === "landscape";
+
   return (
     <motion.div
-      className={`relative mx-auto w-[min(100%,280px)] sm:w-[min(100%,320px)] md:w-[min(100%,360px)] ${className}`}
+      className={`relative mx-auto flex items-center justify-center ${
+        isLandscape
+          ? "w-[min(100%,460px)] sm:w-[min(100%,540px)] md:w-[min(100%,620px)]"
+          : "w-[min(100%,280px)] sm:w-[min(100%,320px)] md:w-[min(100%,360px)]"
+      } ${className}`}
       style={{ opacity: dim ? 0.48 : 1 }}
       transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
       whileHover={
@@ -33,7 +39,7 @@ export function IPhoneMockup({
       }
     >
       <motion.div
-        className="rounded-[2.75rem] border p-[10px] shadow-[0_40px_100px_-20px_rgba(0,0,0,0.85)]"
+        className="border p-[10px] shadow-[0_40px_100px_-20px_rgba(0,0,0,0.85)] rounded-[2.75rem] w-full"
         style={{
           borderColor: "var(--border-subtle)",
           background:
@@ -50,18 +56,28 @@ export function IPhoneMockup({
         transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
       >
         <div
-          className="relative aspect-[9/19.5] overflow-hidden rounded-[2.15rem] bg-black"
+          className={`relative overflow-hidden rounded-[2.15rem] bg-black ${
+            isLandscape ? "aspect-[19.5/9]" : "aspect-[9/19.5]"
+          }`}
           style={{
             boxShadow:
               "inset 0 0 0 1px rgba(255,255,255,0.06), inset 0 0 40px -20px rgba(52,211,153,0.04)",
           }}
         >
+          {/* Dynamic Island */}
           <div
-            className="absolute left-1/2 top-3 z-20 h-[28px] w-[100px] -translate-x-1/2 rounded-full bg-black"
+            className={`absolute z-20 rounded-full bg-black ${
+              isLandscape
+                ? "left-3 top-1/2 h-[100px] w-[28px] -translate-y-1/2"
+                : "left-1/2 top-3 h-[28px] w-[100px] -translate-x-1/2"
+            }`}
             style={{ boxShadow: "inset 0 0 0 1px rgba(255,255,255,0.08)" }}
             aria-hidden
           />
-          <div className="absolute inset-0 z-0">{children}</div>
+
+          <div className="absolute inset-0 z-0 overflow-hidden">
+            {children}
+          </div>
         </div>
       </motion.div>
     </motion.div>

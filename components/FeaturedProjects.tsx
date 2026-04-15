@@ -108,7 +108,7 @@ export function FeaturedProjects() {
                   }
                   transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
                 >
-                  <IPhoneMockup accentHint>
+                  <IPhoneMockup accentHint orientation={p.orientation}>
                     <MockupScreenContent
                       image={p.image}
                       screenContent={p.screenContent}

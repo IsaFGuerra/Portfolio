@@ -10,6 +10,7 @@ export type Project = {
   screenContent: "sign" | "finance" | "editor" | "wellness";
   /** Screenshot under `public/`, e.g. `/projects/runicorn.png` */
   image?: string;
+  orientation?: "portrait" | "landscape";
 };
 
 export const projects: Project[] = [
@@ -23,6 +24,7 @@ export const projects: Project[] = [
     tech: ["Swift", "SpriteKit", "UIKit", "Core Motion"],
     screenContent: "editor",
     image: "/projects/runicorn.png",
+    orientation: "landscape",
   },
   {
     id: "dirty-dogs",

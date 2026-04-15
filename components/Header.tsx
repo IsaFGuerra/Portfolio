@@ -2,20 +2,22 @@
 
 import { motion, useScroll, useMotionValueEvent, AnimatePresence } from "framer-motion";
 import { useState } from "react";
+import { useLocale } from "./LocaleProvider";
 
-const links = [
-  { href: "#about", label: "About" },
-  { href: "#projects", label: "Projects" },
-  { href: "#ai-demo", label: "AI Demo" },
-  { href: "#experience", label: "Experience" },
-  { href: "#skills", label: "Skills" },
-  { href: "#contact", label: "Contact" },
+const linkKeys = [
+  { href: "#about", key: "about" as const },
+  { href: "#projects", key: "projects" as const },
+  { href: "#ai-demo", key: "aiDemo" as const },
+  { href: "#experience", key: "experience" as const },
+  { href: "#skills", key: "skills" as const },
+  { href: "#contact", key: "contact" as const },
 ];
 
 export function Header() {
   const { scrollY } = useScroll();
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const { locale, setLocale, t } = useLocale();
 
   useMotionValueEvent(scrollY, "change", (y) => {
     setScrolled(y > 24);
@@ -58,25 +60,70 @@ export function Header() {
           </motion.span>
           Isadora Guerra
         </motion.a>
-        <nav className="hidden items-center gap-8 md:flex" aria-label="Primary">
-          {links.map((l, i) => (
-            <motion.a
-              key={l.href}
-              href={l.href}
-              className="group relative text-[13px] font-medium text-text-muted transition-colors duration-300 hover:text-text-primary"
-              initial={{ opacity: 0, y: -6 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{
-                delay: 0.08 + i * 0.04,
-                duration: 0.45,
-                ease: [0.22, 1, 0.36, 1],
-              }}
-            >
-              {l.label}
-              <span className="nav-link-line" />
-            </motion.a>
-          ))}
-        </nav>
+        <div className="hidden items-center gap-6 md:flex">
+          <nav className="flex items-center gap-8" aria-label="Primary">
+            {linkKeys.map((l, i) => (
+              <motion.a
+                key={l.href}
+                href={l.href}
+                className="group relative text-[13px] font-medium text-text-muted transition-colors duration-300 hover:text-text-primary"
+                initial={{ opacity: 0, y: -6 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{
+                  delay: 0.08 + i * 0.04,
+                  duration: 0.45,
+                  ease: [0.22, 1, 0.36, 1],
+                }}
+              >
+                {t.nav[l.key]}
+                <span className="nav-link-line" />
+              </motion.a>
+            ))}
+          </nav>
+          <div
+            className="flex items-center gap-1 rounded-lg border border-[var(--border-subtle)] bg-white/[0.02] p-0.5"
+            role="group"
+            aria-label={t.language.label}
+          >
+            {(["pt", "en"] as const).map((code) => (
+              <button
+                key={code}
+                type="button"
+                onClick={() => setLocale(code)}
+                className={`min-w-[2.25rem] rounded-md px-2 py-1 text-[11px] font-semibold tracking-wide transition-colors duration-200 ${
+                  locale === code
+                    ? "bg-accent/15 text-accent"
+                    : "text-text-muted hover:text-text-secondary"
+                }`}
+                aria-pressed={locale === code}
+              >
+                {t.language[code]}
+              </button>
+            ))}
+          </div>
+        </div>
+        <div className="flex items-center gap-2 md:hidden">
+          <div
+            className="flex items-center gap-0.5 rounded-lg border border-[var(--border-subtle)] bg-white/[0.02] p-0.5"
+            role="group"
+            aria-label={t.language.label}
+          >
+            {(["pt", "en"] as const).map((code) => (
+              <button
+                key={code}
+                type="button"
+                onClick={() => setLocale(code)}
+                className={`min-w-[2rem] rounded-md px-1.5 py-1 text-[10px] font-semibold tracking-wide transition-colors duration-200 ${
+                  locale === code
+                    ? "bg-accent/15 text-accent"
+                    : "text-text-muted hover:text-text-secondary"
+                }`}
+                aria-pressed={locale === code}
+              >
+                {t.language[code]}
+              </button>
+            ))}
+          </div>
         <button
           type="button"
           className="flex h-10 w-10 items-center justify-center rounded-lg border border-[var(--border-subtle)] text-text-primary transition-colors duration-300 hover:border-accent/25 hover:text-accent md:hidden"
@@ -102,6 +149,7 @@ export function Header() {
             )}
           </svg>
         </button>
+        </div>
       </div>
       <AnimatePresence>
         {open && (
@@ -114,7 +162,7 @@ export function Header() {
           >
             <div className="bg-bg-base/95 px-5 py-4 backdrop-blur-md">
               <ul className="flex flex-col gap-3">
-                {links.map((l) => (
+                {linkKeys.map((l) => (
                   <li key={l.href}>
                     <motion.a
                       href={l.href}
@@ -124,7 +172,7 @@ export function Header() {
                       animate={{ opacity: 1, x: 0 }}
                       transition={{ duration: 0.25 }}
                     >
-                      {l.label}
+                      {t.nav[l.key]}
                     </motion.a>
                   </li>
                 ))}

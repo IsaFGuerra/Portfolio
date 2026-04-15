@@ -1,6 +1,9 @@
 @import "tailwindcss";
 
 :root {
+  /* System stack — evita fetch ao Google Fonts no `next build` (offline / rede bloqueada). */
+  --font-inter: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Roboto, "Helvetica Neue", Arial, sans-serif;
   --bg-base: #0a0a0a;
   --bg-elevated: #111111;
   --bg-surface: #151515;
@@ -32,7 +35,7 @@
   --color-text-muted: var(--text-muted);
   --color-accent: var(--accent);
   --color-accent-dim: var(--accent-dim);
-  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-inter);
 }
 
 html {
@@ -42,7 +45,7 @@ html {
 body {
   background: var(--bg-base);
   color: var(--text-primary);
-  font-family: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  font-family: var(--font-inter);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
