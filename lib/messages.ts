@@ -26,6 +26,11 @@ export const messages = {
       pt: "PT",
       en: "EN",
     },
+    comingSoon: {
+      kicker: "Isadora Guerra",
+      title: "Portfolio under construction",
+      body: "I'm crafting a new home for my work in frontend, mobile, and intelligent systems. Check back soon.",
+    },
   },
   pt: {
     nav: {
@@ -51,6 +56,11 @@ export const messages = {
       label: "Idioma",
       pt: "PT",
       en: "EN",
+    },
+    comingSoon: {
+      kicker: "Isadora Guerra",
+      title: "Portfólio em construção",
+      body: "Estou preparando um novo espaço para o meu trabalho em frontend, mobile e sistemas inteligentes. Volte em breve.",
     },
   },
 } as const satisfies Record<Locale, unknown>;

@@ -3,13 +3,13 @@ import { LocaleProvider } from "@/components/LocaleProvider";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Isadora Guerra — Frontend & Mobile Developer",
+  title: "Isadora Guerra — Portfólio em construção",
   description:
-    "Thoughtful digital experiences across frontend, mobile, and intelligent systems. Product-minded engineering with craft and clarity.",
+    "Novo portfólio em construção. Frontend, mobile e sistemas inteligentes.",
   openGraph: {
-    title: "Isadora Guerra — Frontend & Mobile Developer",
+    title: "Isadora Guerra — Portfólio em construção",
     description:
-      "Thoughtful digital experiences across frontend, mobile, and intelligent systems.",
+      "Novo portfólio em construção. Frontend, mobile e sistemas inteligentes.",
     type: "website",
   },
 };
